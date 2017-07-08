@@ -31,6 +31,6 @@ build:
             code: $WERCKER_SOURCE_DIR/bin/rails spec
         - internal/docker-push:
             username: $DOCKER_USERNAME
-            password: $$DOCKER_PASSWORD
+            password: $DOCKER_PASSWORD
             tag: dev-latest
             repository: stupidcodefactory/react-shop-api
