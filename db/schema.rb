@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170708170403) do
+ActiveRecord::Schema.define(version: 20170709084143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
+
+  create_table "delivery_charges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "amount_in_cents", default: 0
+    t.int4range "price_range"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["price_range"], name: "index_delivery_charges_on_price_range", using: :gist
+    t.index ["price_range"], name: "no_price_range_overlap", using: :gist
+  end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
