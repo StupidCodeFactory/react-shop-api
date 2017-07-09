@@ -1,14 +1,11 @@
-RSpec.shared_context "products setup", shared_context: :metadata do
-  let(:products_attributes) do
-    [
-      { name: 'Jeans',  code: 'JO1', price_in_cents: 3295 },
-      { name: 'Blouse', code: 'JO1', price_in_cents: 2495 },
-      { name: 'Socks',  code: 'JO1', price_in_cents: 795  }
-    ]
-  end
+RSpec.shared_context "products setup" do
+
+  let!(:jeans)  { Product.create! name: 'Jeans',  code: 'JO1', price_in_cents: 3295  }
+  let!(:blouse) { Product.create! name: 'Blouse', code: 'BO1', price_in_cents: 2495 }
+  let!(:socks)  { Product.create! name: 'Socks',  code: 'SO1', price_in_cents: 795  }
 
   let(:products) do
-    products_attributes.map { |product| Product.create! product }
+    [jeans, blouse, socks]
   end
 
 end
