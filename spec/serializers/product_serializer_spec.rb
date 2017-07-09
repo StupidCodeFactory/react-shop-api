@@ -5,7 +5,7 @@ RSpec.describe ProductSerializer do
     Product.create!(name: 'Socks', code: 'JO1', price_in_cents: 795)
   end
 
-  subject { ProductSerializer.new(product) }
+  subject { described_class.new(product) }
 
   it 'has serialized the product prices correctly' do
     expect(subject.as_json).to eq(

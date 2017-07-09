@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :products
-  resource :checkouts, only: :create
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :checkouts, only: :create do
+    resources :line_items, only: [:create, :destroy]
+  end
 end

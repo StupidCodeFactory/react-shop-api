@@ -28,9 +28,11 @@ ActiveRecord::Schema.define(version: 20170709202652) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "line_items", id: false, force: :cascade do |t|
-    t.bigint "checkout_id", null: false
-    t.bigint "product_id", null: false
+  create_table "line_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "checkout_id"
+    t.uuid "product_id"
+    t.index ["checkout_id"], name: "index_line_items_on_checkout_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
